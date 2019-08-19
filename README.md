@@ -1,4 +1,4 @@
 ```
 python setup.py install
-gunicorn -w 4 -b 0.0.0.0:8000 juststream.wsgi:app
+twistd -n web --port tcp:80 --wsgi juststream.wsgi.app
 ```
