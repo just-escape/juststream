@@ -1,4 +1,4 @@
 ```
 python setup.py install
-twistd -n web --port tcp:80 --wsgi juststream.wsgi.app
+waitress-serve --port 80 --call 'juststream.wsgi:create_app'
 ```

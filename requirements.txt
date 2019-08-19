@@ -1,4 +1,4 @@
 picamera
 flask
 greenlet
-twisted
+waitress

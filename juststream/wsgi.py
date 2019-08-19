@@ -3,8 +3,6 @@
 from flask import Flask, Response
 from juststream.camera import Camera
 
-app = Flask(__name__)
-
 
 def streamer():
     camera = Camera()
@@ -20,14 +18,15 @@ def streamer():
         yield b'\r\n'.join(ret)
 
 
-@app.route('/')
-def stream():
-    r = Response(
-        streamer(),
-        mimetype='multipart/x-mixed-replace; boundary=frame'
-    )
-    return r
+def create_app():
+    app = Flask(__name__)
 
+    @app.route('/')
+    def stream():
+        r = Response(
+            streamer(),
+            mimetype='multipart/x-mixed-replace; boundary=frame'
+        )
+        return r
 
-if __name__ == '__main__':
-    app.run()
+    return app
